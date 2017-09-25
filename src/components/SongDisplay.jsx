@@ -40,17 +40,29 @@ SongDisplay.propTypes = {
 };
 
 const mapStateToProps = state => {
+  console.log(state);
+  let info;
   const song = state.songsById[state.selectedSong];
-  const songInfo = {
-    songId: song.songId,
-    artist: song.artist,
-    title: song.title,
-    currentPhrase: song.currentPhrase,
-    songArray: song.songArray,
-    arrayPosition: song.arrayPosition
+  if (!state.songsById[state.selectedSong].isFetching) {
+    info = {
+      songId: state.selectedSong,
+      artist: state.songsById[state.selectedSong].artist,
+      title: state.songsById[state.selectedSong].title,
+      currentPhrase: state.songsById[state.selectedSong].currentPhrase,
+      songArray: state.songsById[state.selectedSong].songArray,
+      arrayPosition: state.songsById[state.selectedSong].arrayPosition
+    };
+  } else {
+    info = {
+      artist:"",
+      title: "",
+      currentPhrase: "",
+      songArray: "",
+      arrayPosition: ""
+    };
   }
   return {
-    song: songInfo
+    song: info
   };
 };
 
